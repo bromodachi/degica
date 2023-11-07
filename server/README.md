@@ -69,3 +69,4 @@ Due to some personal commitments, I only had 2 days to work on this. There are m
 - In the backend, we currently always retrieve the entries and do the calculation of the total amount. Ideally, we shouldn't be doing this. Instead, every time we add an entry, simply have a field in ledger that keep tracks of the amount and update it there when adding the entry(this will be in one transaction). However, I noticed this late and to save time, just retrieved all the entries.
 - We should split the components more to allow more reusable views. At first, this was my goal as I had a directory called components but had to rush the frontend.
 - Better error handling in general
+- Remove the underscore in degica_project as it's not the java standard to have an underscore in the package name
