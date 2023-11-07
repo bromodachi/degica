@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD MAPPER 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.degica_project.repository.mapper.CurrencyMapper">
+
+    <select id="isValidCurrency" resultType="boolean">
+        SELECT EXISTS(SELECT 1 FROM currency WHERE name = #{name});
+    </select>
+
+    <select id="getCurrencyId" resultType="long">
+        SELECT id FROM currency WHERE name = #{name}
+    </select>
+</mapper>

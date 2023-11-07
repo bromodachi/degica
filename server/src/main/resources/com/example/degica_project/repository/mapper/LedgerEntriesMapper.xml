@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD MAPPER 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.degica_project.repository.mapper.LedgerEntriesMapper">
+    <resultMap id="ledgerEntry" type="com.example.degica_project.entity.LedgerEntryEntity">
+        <id column="id" property="id"/>
+        <result column="amount" property="amount"/>
+        <result column="currency" property="currency" javaType="String"/>
+        <result column="is_credit" property="isCredit"/>
+        <result column="description" property="description"/>
+        <result column="datetime" property="datetime"/>
+    </resultMap>
+
+    <select id="findAllEntries" resultMap="ledgerEntry">
+        SELECT ld.id AS id,
+               ld.amount AS amount,
+               c.name AS currency,
+               ld.is_credit AS is_credit,
+               ld.description AS description,
+               ld.datetime AS datetime
+        FROM ledger_details ld
+        JOIN currency c ON c.id = ld.currency_id
+        WHERE ld.id <![CDATA[ < ]]> #{lastIdSeen} AND ld.ledger_id = #{ledgerId}
+        ORDER BY ld.datetime DESC, id DESC
+        LIMIT #{limit}
+
+
+    </select>
+
+    <insert id="addEntry" useGeneratedKeys="true" keyProperty="ledgerToCreate.id" keyColumn="id">
+
+        INSERT INTO ledger_details
+        (ledger_id, amount, currency_id, is_credit, description, datetime, created_at, updated_at)
+        VALUES (#{ledgerId},   #{ledgerToCreate.amount}, #{currencyId}, #{ledgerToCreate.isCredit} , #{ledgerToCreate.description}, #{ledgerToCreate.datetime}, #{currTime}, #{currTime});
+    </insert>
+</mapper>

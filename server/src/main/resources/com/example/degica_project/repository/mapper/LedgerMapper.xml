@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.degica_project.repository.mapper.LedgerMapper">
+    <resultMap id="results" type="com.example.degica_project.entity.LedgerEntity">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+    </resultMap>
+
+    <select id="findLedger" resultMap="results">
+        SELECT *
+        FROM ledger
+        WHERE id = #{ledgerId}
+    </select>
+
+
+    <select id="getLedgers" resultMap="results">
+        SELECT *
+        FROM ledger AS l
+        WHERE l.id <![CDATA[ < ]]> #{lastId}
+        ORDER BY id DESC
+        LIMIT #{limit}
+    </select>
+
+    <insert id="createLedger" useGeneratedKeys="true" keyProperty="ledgerEntity.id" keyColumn="id">
+        INSERT INTO ledger (name) VALUES (#{ledgerEntity.name});
+    </insert>
+
+</mapper>
