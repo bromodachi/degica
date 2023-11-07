@@ -4,7 +4,7 @@
 # Note
 This was primarily worked only on a Sunday and Tuesday night(2 days) on both the frontend and backend.
 I had to take some shortcuts and write code that's not really pretty. They may be some oversights or bugs in the application.
-Also please note that I'm primarily a backend developer so frontend is not my strong point
+Also please note that I'm primarily a backend developer so frontend is not my strong point but willing to re-learn it again.
 
 The following assumptions are made:
 - We are only supporting JPY, KRW, and USD.
@@ -15,7 +15,7 @@ The following assumptions are made:
 
 ## How to run the program
 
-Usually, I write supply a dockerfile so all you have to do is run docker-compose up but due to lack of time, please allow me to omit this. Instead, please have docker running in the background. If you have a mac, all you have to do is install it via brew:
+Usually, I write supply a dockerfile so all you have to do is run docker-compose up but due to lack of time, please allow me to omit this. Instead, please have docker running in the background(especially for the integration tests). If you have a mac, all you have to do is install it via brew:
 
 ```
 brew install docker
@@ -45,7 +45,7 @@ If that succeeds, all you have to do is run:
 
 For the frontend, you should install everything in the package:
 ```
-cd ../frontend
+cd ../frontend/ledger-app
 npm install
 ```
 Once that succeeds, you can just start the application.
@@ -68,4 +68,4 @@ Due to some personal commitments, I only had 2 days to work on this. There are m
 - When adding a new item, the frontend always goes back to the front page(even if you add a later date). I only did this to make it easier to update the list view.
 - In the backend, we currently always retrieve the entries and do the calculation of the total amount. Ideally, we shouldn't be doing this. Instead, every time we add an entry, simply have a field in ledger that keep tracks of the amount and update it there when adding the entry(this will be in one transaction). However, I noticed this late and to save time, just retrieved all the entries.
 - We should split the components more to allow more reusable views. At first, this was my goal as I had a directory called components but had to rush the frontend.
-- Better error handling 
+- Better error handling in general
